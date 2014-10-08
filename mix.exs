@@ -26,8 +26,6 @@ defmodule BufferTcp.Mixfile do
   # Type `mix help deps` for more examples and options
   defp deps do
     [
-      {:mock, git: "git@github.com:jjh42/mock.git"},
-      {:socket, "~> 0.2.5"}
     ]
   end
 end
