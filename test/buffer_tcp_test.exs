@@ -1,7 +1,4 @@
 defmodule BufferTcpTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
 
-  test "the truth" do
-    assert 1 + 1 == 2
-  end
 end
