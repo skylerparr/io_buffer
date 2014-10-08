@@ -48,7 +48,7 @@ defmodule ValueConverter do
   end
 
   @doc """
-  converts a signed short to a 4 item list represented as bytes. 
+  converts a signed integer to a 4 item list represented as bytes. 
   Will not accept integers greater than 2,147,483,648 and less than -2,147,483,649
 
   ## Examples
@@ -63,7 +63,7 @@ defmodule ValueConverter do
   end
 
   @doc """
-  converts a signed short to a 6 item list represented as bytes. 
+  converts a unsigned integer to a 6 item list represented as bytes. 
   Will not accept integers greater than 4,294,967,296 and less than -1
 
   ## Examples
@@ -75,6 +75,21 @@ defmodule ValueConverter do
     :erlang.term_to_binary(value)
       |> :erlang.binary_to_list
       |> Enum.drop(2)
+  end
+
+  @doc """
+  converts a float to a 8 item list represented as bytes. 
+
+  ## Examples
+
+  iex> ValueConverter.convert_float(521.256)
+  [64, 128, 74, 12, 73, 186, 94, 53]
+  """
+  def convert_float(value) do
+    :erlang.term_to_binary(value)
+      |> :erlang.binary_to_list
+      |> Enum.drop(2)
+      |> pad_list(8)
   end
 
   @doc """

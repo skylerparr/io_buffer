@@ -83,4 +83,10 @@ defmodule ValueConverterTest do
   test "should not accept integer less that -1 for an int" do
     assert_raise FunctionClauseError, fn -> ValueConverter.convert_unsigned_int(-1) end
   end
+  
+  test "should convert float to a 8 length list" do
+    list = ValueConverter.convert_float(2910.23193)
+    assert length(list) == 8
+    assert 2910.23193 == ValueConverter.list_to_float(list)
+  end
 end
