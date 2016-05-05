@@ -152,7 +152,19 @@ defmodule ValueConverter do
       |> :erlang.binary_to_term([:safe])
   end
 
-  defp pad_list(list, length) do
+  @doc """
+    adds zeros to pad out the length of the array to make it 
+    to necessary size
+
+    ## Examples
+
+    iex> ValueConverter.pad_list([32,58], 4)
+    [0,0,32,58]
+
+    iex> ValueConverter.pad_list([9], 8)
+    [0,0,0,0,0,0,0,9] 
+  """
+  def pad_list(list, length) do
     if(length(list) < length) do
       pad_list([0] ++ list, length)
     else
