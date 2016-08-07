@@ -4,7 +4,7 @@ defmodule IOBuffer.Mixfile do
   def project do
     [app: :io_buffer,
      version: "0.0.1",
-     elixir: "~> 1.0.0",
+     elixir: "~> 1.3",
      deps: deps]
   end
 

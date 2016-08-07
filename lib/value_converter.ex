@@ -40,11 +40,16 @@ defmodule ValueConverter do
 
   iex> ValueConverter.convert_unsigned_short(32490)
   [126, 234]
+  iex> ValueConverter.convert_unsigned_short(32)
+  [0, 32]
   """
   def convert_unsigned_short(value) when value < 65_536 and value > -1 do
     :erlang.term_to_binary(value)
       |> :erlang.binary_to_list
-      |> Enum.drop(4)
+      |> Enum.drop(2)
+      |> pad_list(4)
+      |> Enum.drop(2)
+      |> pad_list(2)
   end
 
   @doc """
@@ -60,6 +65,7 @@ defmodule ValueConverter do
     :erlang.term_to_binary(value)
       |> :erlang.binary_to_list
       |> Enum.drop(2)
+      |> pad_list(4)
   end
 
   @doc """

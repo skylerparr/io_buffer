@@ -38,6 +38,9 @@ defmodule ValueConverterTest do
     list = ValueConverter.convert_unsigned_short(1293)
     assert length(list) == 2
     assert 1293 == ValueConverter.list_to_short(list)
+    list = ValueConverter.convert_unsigned_short(5)
+    assert length(list) == 2
+    assert 5 == ValueConverter.list_to_short(list)
   end
 
   test "should not accept integer larger than 65,536 for an unsigned short" do
@@ -59,7 +62,10 @@ defmodule ValueConverterTest do
   test "should convert an int to a 4 length list" do
     list = ValueConverter.convert_int(29348)
     assert length(list) == 4
-    assert 29348 == ValueConverter.list_to_short(list)
+    assert 29348 == ValueConverter.list_to_int(list)
+    list = ValueConverter.convert_int(29)
+    assert length(list) == 4
+    assert 29 == ValueConverter.list_to_int(list)
   end
 
   test "should not accept integer larger than 2,147,483,648 for an int" do
@@ -73,7 +79,7 @@ defmodule ValueConverterTest do
   test "should convert an unsigned int to a 6 length list" do
     list = ValueConverter.convert_int(24239348)
     assert length(list) == 4
-    assert 24239348 == ValueConverter.list_to_short(list)
+    assert 24239348 == ValueConverter.list_to_int(list)
   end
 
   test "should not accept integer larger than 4,294,967,296 for an int" do
