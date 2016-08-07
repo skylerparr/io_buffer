@@ -119,11 +119,11 @@ defmodule ValueConverter do
 
   ## Examples
 
-  iex> ValueConverter.list_to_int([32,82,126,234])
-  542277354
+  iex> ValueConverter.list_to_int([127,255,255,255])
+  2147483647
 
-  iex> ValueConverter.list_to_int([4, 1, 29, 82, 12, 235])
-  -3943453213
+  iex> ValueConverter.list_to_int([255, 255, 255, 255])
+  -1
   """
   def list_to_int(list) do
     list = pad_list(list, 4)
@@ -158,9 +158,32 @@ defmodule ValueConverter do
       |> :erlang.binary_to_term([:safe])
   end
 
-  defp pad_list(list, length) do
+  @doc """
+    adds zeros to pad out the length of the array to make it 
+    to necessary size
+
+    ## Examples
+
+    iex> ValueConverter.pad_list([32,58], 4)
+    [0,0,32,58]
+
+    iex> ValueConverter.pad_list([9], 8)
+    [0,0,0,0,0,0,0,9] 
+
+    iex> ValueConverter.pad_list([0,0,0,8], 2)
+    [0,8]
+  """
+  def pad_list(list, length) do
     if(length(list) < length) do
       pad_list([0] ++ list, length)
+    else
+      unpad_list(list, length)
+    end
+  end
+
+  def unpad_list(list, length) do
+    if(length(list) > length) do
+      unpad_list(Enum.drop(list, 1), length)
     else
       list
     end

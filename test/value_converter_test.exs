@@ -95,4 +95,14 @@ defmodule ValueConverterTest do
     assert length(list) == 8
     assert 2910.23193 == ValueConverter.list_to_float(list)
   end
+
+  test "should pad list with zeros" do
+    list = ValueConverter.pad_list([0,0,0,8], 6)
+    assert list == [0,0,0,0,0,8]
+  end
+
+  test "should un-pad list by chomping off the head" do
+    list = ValueConverter.pad_list([0,0,0,8], 2)
+    assert list == [0,8]
+  end
 end
